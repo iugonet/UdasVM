@@ -1,0 +1,29 @@
+;----- Get path of TDAS -----;
+path_idl=getenv('IDL_PATH')
+pos=strpos(path_idl, '+', /reverse_search)
+path_tdas=strmid(path_idl, pos+1, strlen(path_idl)-pos)
+print, 'path_tdas=', path_tdas
+
+;----- Set path of VM -----;
+cd, current=path_cur
+path_vm=path_cur+'/idl_tdas/'
+
+;----- Check path -----;
+.comp chk_dir
+chk_dir, path_tdas, path_vm
+
+;----- Make compile list -----;
+.comp compilelist
+compilelist, path_tdas
+
+;----- Compile TDAS -----;
+@compile_list
+
+;----- Resolve all -----;
+.comp resolve_vm
+resolve_vm, path_tdas
+
+;----- Make package of VM -----;
+make_package, path_tdas, path_vm
+
+exit
