@@ -1,3 +1,5 @@
+Script to build VM for TDAS v7.01 with UDAS v2.01.1.
+
 (a) How to compile the executable file that can run on IDL-VM.
 
 Modify the path_tdas in build_vm.csh, and execute the command as follows;
