@@ -9,7 +9,7 @@ Modify the path_tdas in build_vm.csh, and execute the command as follows;
 
 (b) How to run the executable file.
 
-idl -vm='idlvm_tdas/thm_gui_new/thm_gui_new.sav'
+idl -vm='idlvm_udas/thm_gui_new/thm_gui_new.sav'
 
 
 (c)Flow of compilation:
