@@ -1,0 +1,46 @@
+;----- Get path of TDAS & UDAS -----;
+path_idl=getenv('IDL_PATH')
+pos=strpos(path_idl, '+', /reverse_search)
+path_udas_org=strmid(path_idl, pos+1, strlen(path_idl)-pos)
+print, 'path_udas_org=', path_udas_org
+
+path_idl=strmid(path_idl, 0, pos-1)
+pos=strpos(path_idl, '+', /reverse_search)
+path_tdas_org=strmid(path_idl, pos+1, strlen(path_idl)-pos)
+print, 'path_tdas_org=', path_tdas_org
+
+;----- Set path of VM & new TDAS and UDAS -----;
+cd, current=path_cur
+path_vm=path_cur+'/idlvm_udas/'
+path_tdas=path_cur+'/tdas_new/'
+path_udas=path_cur+'/udas_new/'
+
+;----- Check path -----;
+.comp chk_dir
+chk_dir, path_tdas_org, path_udas_org, $
+     path_tdas, path_udas, path_vm
+
+;----- Copy UDAS to TDAS -----;
+.comp cp_udas2tdas
+cp_udas2tdas, path_tdas_org, path_udas_org, path_tdas, path_udas
+
+;----- Make compile list -----;
+.comp compilelist
+compilelist, path_tdas
+
+;----- Compile TDAS -----;
+@compile_list
+
+;----- Resolve all -----;
+.comp resolve_vm
+resolve_vm, path_tdas
+
+;----- Make package of VM -----;
+.comp make_package
+make_package, path_tdas, path_vm
+
+;----- Remove temporary directories -----;
+.comp rm_dir
+rm_dir, path_tdas, path_udas
+
+exit

@@ -6,7 +6,7 @@ print, 'path_tdas=', path_tdas
 
 ;----- Set path of VM -----;
 cd, current=path_cur
-path_vm=path_cur+'/idl_tdas/'
+path_vm=path_cur+'/idlvm_tdas/'
 
 ;----- Check path -----;
 .comp chk_dir
